@@ -34,9 +34,9 @@ class Speaker(object):
         if base_url.endswith("/"):
             base_url = base_url[:-1]
         self.base_url = base_url
-        self.token = token if isinstance(token, str) else token
-        self.id = id if isinstance(id, str) else id
-        self.version = version if isinstance(version, (int, str)) else version
+        self.token = token if isinstance(token, str) else ""
+        self.id = id if isinstance(id, str) else ""
+        self.version = version if isinstance(version, (int, str)) else "1"
 
     def _default_response_handler(self, response: Response = None):
         """
