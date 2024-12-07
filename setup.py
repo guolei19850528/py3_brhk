@@ -17,7 +17,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 setup(
     name="py3-brhk",
-    version="1.0.1",
+    version="1.1.1",
     description="The Python3 Brhk Library Developed By Guolei",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -25,10 +25,10 @@ setup(
     author="guolei",
     author_email="174000902@qq.com",
     license="MIT",
-    keywors=["brhk", "天津博瑞皓科", "博瑞皓科", "智能音箱"],
+    keywors=["brhk", "天津博瑞皓科", "博瑞皓科", "智能音箱", "guolei", "郭磊"],
     packages=setuptools.find_packages('./'),
     install_requires=[
-        "requests",
+        "py3-requests",
         "addict",
         "retrying",
         "jsonschema",
