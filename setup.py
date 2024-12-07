@@ -17,7 +17,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 setup(
     name="py3-brhk",
-    version="1.1.2",
+    version="1.1.3",
     description="The Python3 Brhk Library Developed By Guolei",
     long_description=long_description,
     long_description_content_type="text/markdown",

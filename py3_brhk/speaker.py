@@ -82,7 +82,9 @@ class Speaker(object):
         kwargs = Dict(kwargs)
         kwargs.setdefault("method", "POST")
         kwargs.setdefault("response_handler", ResponseHandler.normal_handler)
-        kwargs.setdefault("url", f"{self.base_url}{ReqeustUrl.NOTIFY_URL}")
+        kwargs.setdefault("url", f"{ReqeustUrl.NOTIFY_URL}")
+        if not kwargs.get("url", "").startswith("http"):
+            kwargs["url"] = self.base_url + kwargs["url"]
         kwargs.setdefault("data", Dict())
         kwargs.data.setdefault("token", self.token)
         kwargs.data.setdefault("id", self.id)
