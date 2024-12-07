@@ -10,9 +10,7 @@ Github：https://github.com/guolei19850528/py3_brhk
 """
 from typing import Union
 
-import jsonschema
 import py3_requests
-import requests
 from addict import Dict
 from jsonschema.validators import Draft202012Validator
 from requests import Response
