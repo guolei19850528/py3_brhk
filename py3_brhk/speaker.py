@@ -15,36 +15,28 @@ from addict import Dict
 from jsonschema.validators import Draft202012Validator
 from requests import Response
 
-
-class ReqeustUrl:
-    BASE_URL: str = "https://speaker.17laimai.cn/"
-    NOTIFY_URL: str = "/notify.php"
-
-
-class ValidatorJsonSchema:
-    NORMAL_SCHEMA = {
-        "type": "object",
-        "properties": {
-            "errcode": {
-                "oneOf": [
-                    {"type": "integer", "const": 0},
-                    {"type": "string", "const": "0"},
-                ]
-            }
-        },
-        "required": ["errcode"]
-    }
+validator_json_schema = Dict()
+validator_json_schema.normal = Dict({
+    "type": "object",
+    "properties": {
+        "errcode": {
+            "oneOf": [
+                {"type": "integer", "const": 0},
+                {"type": "string", "const": "0"},
+            ]
+        }
+    },
+    "required": ["errcode"]
+})
 
 
-class ResponseHandler:
-    @staticmethod
-    def normal_handler(response: Response = None):
-        if isinstance(response, Response):
-            json_addict = Dict(response.json())
-            if Draft202012Validator(ValidatorJsonSchema).is_valid(json_addict):
-                return True
-            return False
-        raise Exception(f"Response Handler Error {response.status_code}|{response.text}")
+def normal_response_handler(response: Response = None):
+    if isinstance(response, Response):
+        json_addict = Dict(response.json())
+        if Draft202012Validator(validator_json_schema.normal).is_valid(json_addict):
+            return True
+        return False
+    raise Exception(f"Response Handler Error {response.status_code}|{response.text}")
 
 
 class Speaker(object):
@@ -56,7 +48,7 @@ class Speaker(object):
 
     def __init__(
             self,
-            base_url: str = ReqeustUrl.BASE_URL,
+            base_url: str = "https://speaker.17laimai.cn/",
             token: str = "",
             id: str = "",
             version: Union[int, str] = "1"
@@ -81,8 +73,8 @@ class Speaker(object):
         """
         kwargs = Dict(kwargs)
         kwargs.setdefault("method", "POST")
-        kwargs.setdefault("response_handler", ResponseHandler.normal_handler)
-        kwargs.setdefault("url", f"{ReqeustUrl.NOTIFY_URL}")
+        kwargs.setdefault("response_handler", normal_response_handler)
+        kwargs.setdefault("url", f"/notify.php")
         if not kwargs.get("url", "").startswith("http"):
             kwargs["url"] = self.base_url + kwargs["url"]
         kwargs.setdefault("data", Dict())
