@@ -15,6 +15,10 @@ from addict import Dict
 from jsonschema.validators import Draft202012Validator
 from requests import Response
 
+request_urls = Dict()
+request_urls.base = "https://speaker.17laimai.cn/"
+request_urls.notify = "/notify.php"
+
 validator_json_schema = Dict()
 validator_json_schema.normal = Dict({
     "type": "object",
@@ -48,7 +52,7 @@ class Speaker(object):
 
     def __init__(
             self,
-            base_url: str = "https://speaker.17laimai.cn/",
+            base_url: str = request_urls.base,
             token: str = "",
             id: str = "",
             version: Union[int, str] = "1"
@@ -68,13 +72,13 @@ class Speaker(object):
 
         @see https://www.yuque.com/lingdutuandui/ugcpag/umbzsd#teXR7
         :param message:
-        :param kwargs:
+        :param kwargs: py3_requests.request kwargs
         :return:
         """
         kwargs = Dict(kwargs)
         kwargs.setdefault("method", "POST")
         kwargs.setdefault("response_handler", normal_response_handler)
-        kwargs.setdefault("url", f"/notify.php")
+        kwargs.setdefault("url", request_urls.notify)
         if not kwargs.get("url", "").startswith("http"):
             kwargs["url"] = self.base_url + kwargs["url"]
         kwargs.setdefault("data", Dict())
