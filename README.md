@@ -22,7 +22,7 @@ speaker = Speaker(
     token="<token>",
     id="<id>"
 )
-state, _ = speaker.notify(message="测试信息")
+state = speaker.notify(message="测试信息")
 if state:
     print("successful")
 ```
