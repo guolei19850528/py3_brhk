@@ -8,9 +8,9 @@ The Python3 Brhk Library Developed By Guolei
 pip install py3_brhk
 ```
 
-# Official Documentation
+# Documentation
 
-## [Home](https://www.yuque.com/lingdutuandui/ugcpag)
+## [Document](https://www.yuque.com/lingdutuandui/ugcpag)
 
 # Example
 ## Speaker
