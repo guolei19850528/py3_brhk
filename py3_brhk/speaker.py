@@ -78,7 +78,7 @@ class Speaker(object):
         :return:
         """
         kwargs = Dict(kwargs)
-        kwargs.setdefault("method", "POST")
+        kwargs.setdefault("method", py3_requests.RequestMethod.POST)
         kwargs.setdefault("response_handler", ResponseHandler.success())
         kwargs.setdefault("url", RequestUrls.NOTIFY)
         if not kwargs.get("url", "").startswith("http"):
